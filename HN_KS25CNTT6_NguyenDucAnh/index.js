@@ -85,7 +85,7 @@ btnSubmit.addEventListener("click", (e) => {
         editingId = null;
     } else {
         const newEmployee = {
-            id: "NV-" + Date.now(), // ID duy nhất dựa trên thời gian
+            id: "NV-" + Date.now(), 
             fullName: nameValue,
             dob: dobValue,
             email: emailValue,
@@ -130,7 +130,7 @@ function deleteEmployee(id) {
 // TÌM KIẾM 
 inputSearch.addEventListener("input", (e) => {
     searchQuery = e.target.value;
-    renderTable(); // Vẽ lại bảng mỗi khi người dùng gõ phím
+    renderTable(); 
 });
 
 //HÀM HỖ TRỢ
