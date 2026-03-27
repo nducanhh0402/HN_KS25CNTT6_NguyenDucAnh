@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản Lý Nhân Viên</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <!-- ══════════════════════════════════════
+     HEADER
+══════════════════════════════════════ -->
+    <header>
+      <div class="header-left">
+        <div class="header-icon">👤</div>
+        <h1>Quản Lý Nhân Viên</h1>
+      </div>
+      <span class="header-badge" id="totalBadge">0 nhân viên</span>
+    </header>
+
+    <!-- ══════════════════════════════════════
+     MAIN
+══════════════════════════════════════ -->
+    <main>
+      <!-- TOOLBAR -->
+      <div class="card">
+        <div class="card-header">
+          <div class="section-icon icon-teal">🔍</div>
+          <h2>Tìm kiếm & Sắp xếp</h2>
+        </div>
+        <div class="toolbar-body">
+          <div class="field-group">
+            <label>Tìm kiếm</label>
+            <div class="search-wrap">
+              <span class="search-icon">⌕</span>
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Họ tên, email, địa chỉ…"
+              />
+            </div>
+          </div>
+          <div class="field-group">
+            <label>Sắp xếp theo</label>
+            <select id="sortSelect">
+              <option value="">— Tất cả —</option>
+              <option value="name_asc">Họ tên A → Z</option>
+              <option value="name_desc">Họ tên Z → A</option>
+              <option value="dob_asc">Ngày sinh cũ nhất</option>
+              <option value="dob_desc">Ngày sinh mới nhất</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Hiển thị</label>
+            <select id="pageSizeSelect" style="width: 110px">
+              <option value="5">5 / trang</option>
+              <option value="10" selected>10 / trang</option>
+              <option value="20">20 / trang</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM THÊM MỚI -->
+      <div class="card">
+        <div class="card-header">
+          <h2 id="formTitle">Thêm nhân viên mới</h2>
+        </div>
+        <div class="form-body">
+          <input type="hidden" id="editId" />
+          <div class="form-grid">
+            <div class="form-field">
+              <label>Họ và tên <span class="required-star">*</span></label>
+              <input type="text" id="inputName" placeholder="Nguyễn Văn A" />
+            </div>
+            <div class="form-field">
+              <label>Ngày sinh <span class="required-star">*</span></label>
+              <input type="date" id="inputDob" />
+            </div>
+            <div class="form-field">
+              <label>Email <span class="required-star">*</span></label>
+              <input
+                type="email"
+                id="inputEmail"
+                placeholder="example@mail.com"
+              />
+            </div>
+            <div class="form-field" style="grid-column: span 2">
+              <label>Địa chỉ</label>
+              <input
+                type="text"
+                id="inputAddress"
+                placeholder="Số nhà, đường, quận/huyện, tỉnh/thành phố"
+              />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary" id="btnSubmit">
+              Thêm nhân viên
+            </button>
+            <button class="btn btn-secondary">Làm mới</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DANH SÁCH -->
+      <div class="card">
+        <div class="card-header">
+          <div class="section-icon icon-red">☰</div>
+          <h2>Danh sách nhân viên</h2>
+          <span
+            id="listCount"
+            style="margin-left: auto; font-size: 12px; color: #999"
+            >7 kết quả</span
+          >
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>STT</th>
+                <th>Họ và tên</th>
+                <th>Ngày sinh</th>
+                <th>Email</th>
+                <th>Địa chỉ</th>
+                <th style="width: 130px">Hành động</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <tr id="row-NVMN2GOVDBY3X">
+                <td>1</td>
+                <td class="td-name">Nguyễn Văn An</td>
+                <td>12/05/1990</td>
+                <td class="td-email">an.nguyen@company.vn</td>
+                <td>12 Lý Thường Kiệt, Hoàn Kiếm, Hà Nội</td>
+                <td>
+                  <div class="td-actions">
+                    <button class="btn btn-sm btn-edit">✏ Sửa</button>
+                    <button class="btn btn-sm btn-delete">✕ Xóa</button>
+                  </div>
+                </td>
+              </tr>
+              <tr id="row-NVMN2GOVDBOY3">
+                <td>2</td>
+                <td class="td-name">Trần Thị Bích</td>
+                <td>23/08/1995</td>
+                <td class="td-email">bich.tran@company.vn</td>
+                <td>45 Nguyễn Huệ, Quận 1, TP. HCM</td>
+                <td>
+                  <div class="td-actions">
+                    <button class="btn btn-sm btn-edit">✏ Sửa</button>
+                    <button class="btn btn-sm btn-delete">✕ Xóa</button>
+                  </div>
+                </td>
+              </tr>
+              <tr id="row-NVMN2GOVDBSW7">
+                <td>3</td>
+                <td class="td-name">Lê Minh Cường</td>
+                <td>03/11/1988</td>
+                <td class="td-email">cuong.le@company.vn</td>
+                <td>78 Trần Phú, Hải Châu, Đà Nẵng</td>
+                <td>
+                  <div class="td-actions">
+                    <button class="btn btn-sm btn-edit">✏ Sửa</button>
+                    <button class="btn btn-sm btn-delete">✕ Xóa</button>
+                  </div>
+                </td>
+              </tr>
+              <tr id="row-NVMN2GOVDBMAF">
+                <td>4</td>
+                <td class="td-name">Phạm Thị Dung</td>
+                <td>17/02/1993</td>
+                <td class="td-email">dung.pham@company.vn</td>
+                <td>23 Lê Lợi, Vũng Tàu</td>
+                <td>
+                  <div class="td-actions">
+                    <button class="btn btn-sm btn-edit">✏ Sửa</button>
+                    <button class="btn btn-sm btn-delete">✕ Xóa</button>
+                  </div>
+                </td>
+              </tr>
+              <tr id="row-NVMN2GOVDBCPD">
+                <td>5</td>
+                <td class="td-name">Hoàng Văn Em</td>
+                <td>09/07/1997</td>
+                <td class="td-email">em.hoang@company.vn</td>
+                <td>56 Điện Biên Phủ, Bình Thạnh, TP. HCM</td>
+                <td>
+                  <div class="td-actions">
+                    <button class="btn btn-sm btn-edit">✏ Sửa</button>
+                    <button class="btn btn-sm btn-delete">✕ Xóa</button>
+                  </div>
+                </td>
+              </tr>
+              <tr id="row-NVMN2GOVDBP3I">
+                <td>6</td>
+                <td class="td-name">Vũ Thị Phương</td>
+                <td>30/12/1991</td>
+                <td class="td-email">phuong.vu@company.vn</td>
+                <td>9 Pasteur, Quận 3, TP. HCM</td>
+                <td>
+                  <div class="td-actions">
+                    <button class="btn btn-sm btn-edit">✏ Sửa</button>
+                    <button class="btn btn-sm btn-delete">✕ Xóa</button>
+                  </div>
+                </td>
+              </tr>
+              <tr id="row-NVMN2GOVDB5UG">
+                <td>7</td>
+                <td class="td-name">Đặng Quang Huy</td>
+                <td>14/04/1999</td>
+                <td class="td-email">huy.dang@company.vn</td>
+                <td>34 Lê Văn Lương, Thanh Xuân, Hà Nội</td>
+                <td>
+                  <div class="td-actions">
+                    <button class="btn btn-sm btn-edit">✏ Sửa</button>
+                    <button class="btn btn-sm btn-delete">✕ Xóa</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="emptyState" class="empty-state" style="display: none">
+            <div class="empty-icon">🗂️</div>
+            <p>Chưa có nhân viên nào. Hãy thêm nhân viên đầu tiên!</p>
+          </div>
+        </div>
+        <div class="pagination-bar">
+          <div class="pagination-info" id="pageInfo">
+            Hiển thị <strong>1–7</strong> trong tổng số <strong>7</strong>
+          </div>
+          <div class="pagination-controls" id="pagination"></div>
+        </div>
+      </div>
+    </main>
+    <script src="index.js"></script>
+  </body>
+</html>
